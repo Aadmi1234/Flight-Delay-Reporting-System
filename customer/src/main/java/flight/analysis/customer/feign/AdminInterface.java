@@ -18,7 +18,7 @@ public interface AdminInterface {
     @PostMapping("customer/register")
     ResponseEntity<String> registerCustomer(@RequestBody CustomerDTO customer);
 
-    @PostMapping("customer/bookFlight/{flight}")
+    @PostMapping("customer/bookFlight")
     ResponseEntity<String> bookFlight(@RequestBody BookFlightDTO bookFlightDTO);
 
     @GetMapping("customer/getFlights")

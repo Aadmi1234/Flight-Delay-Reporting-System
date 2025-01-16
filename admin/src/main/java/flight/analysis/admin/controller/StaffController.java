@@ -17,7 +17,7 @@ public class StaffController {
         return staffService.addFlight(flightDTO);
     }
 
-    @PostMapping("updateFlight/{flight}")
+    @PostMapping("updateFlight")
     ResponseEntity<String> updateFlight(@RequestBody FlightDTO flight) {
         return staffService.updateFlight(flight);
     }

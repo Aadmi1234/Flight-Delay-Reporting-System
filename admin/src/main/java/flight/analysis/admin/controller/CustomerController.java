@@ -23,7 +23,7 @@ public class CustomerController {
         return customerService.registerCustomer(customer);
     }
 
-    @PostMapping("bookFlight/{flight}")
+    @PostMapping("bookFlight")
     ResponseEntity<String> bookFlight(@RequestBody BookFlightDTO bookFlightDTO) {
         return customerService.bookFlight(bookFlightDTO);
     }

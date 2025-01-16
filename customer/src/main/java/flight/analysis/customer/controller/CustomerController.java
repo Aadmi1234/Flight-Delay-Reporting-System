@@ -21,7 +21,7 @@ public class CustomerController {
         return adminInterface.registerCustomer(customer);
     }
 
-    @PostMapping("/bookFlight/{flight}")
+    @PostMapping("/bookFlight")
     ResponseEntity<String> bookFlight(@RequestBody BookFlightDTO bookFlightDTO) {
         return adminInterface.bookFlight(bookFlightDTO);
     }
