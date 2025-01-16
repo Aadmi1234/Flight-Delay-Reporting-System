@@ -18,7 +18,8 @@ public class StaffService {
     public ResponseEntity<String> addFlight(FlightDTO flight) {
         Optional<Flight> temp = flightRepo.findById(flight.getNumber());
         if (temp.isEmpty()) {
-            Flight flight1 = temp.get();
+            Flight flight1 = new Flight();
+            flight1.setNumber(flight.getNumber());
             flight1.setDelay(flight.getDelay());
             flight1.setTof(flight.getTof());
             flight1.setDestination(flight.getDestination());
@@ -29,9 +30,9 @@ public class StaffService {
         return new ResponseEntity<>("Flight already present.", HttpStatus.CONFLICT);
     }
 
-    public ResponseEntity<String> updateFlight(FlightDTO flight, Long flightId) {
+    public ResponseEntity<String> updateFlight(FlightDTO flight) {
         Optional<Flight> temp = flightRepo.findById(flight.getNumber());
-        if (temp.isEmpty()) {
+        if (!temp.isEmpty()) {
             Flight flight1 = temp.get();
             flight1.setDelay(flight.getDelay());
             flight1.setTof(flight.getTof());

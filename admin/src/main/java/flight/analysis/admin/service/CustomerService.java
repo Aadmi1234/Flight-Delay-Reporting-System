@@ -12,12 +12,14 @@ import flight.analysis.admin.repository.FlightRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
@@ -59,7 +61,7 @@ public class CustomerService {
     public DelayDataDTO getFlight(CustomerDTO customer, Long flight) {
         String mobileNo = customer.getMobileNo();
         Optional<Bookings> booking = bookingsRepo.findOneByMobileNoAndFlight(mobileNo, flight);
-        if (!booking.isEmpty()) return getDelays(Collections.singletonList(booking.get())).getFirst();
+        if (!booking.isEmpty()) return getDelays(Collections.singletonList(booking.get())).get(0);
         return null;
     }
 

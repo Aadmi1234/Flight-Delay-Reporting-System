@@ -12,6 +12,6 @@ public interface AdminInterface {
     @PostMapping("staff/addFlight")
     ResponseEntity<String> addFlight(@RequestBody FlightDTO flightDTO);
 
-    @PostMapping("staff/updateFlight/{flight}")
-    ResponseEntity<String> updateFlight(@RequestBody FlightDTO flightDTO, @PathVariable Long flight);
+    @PostMapping("staff/updateFlight")
+    ResponseEntity<String> updateFlight(@RequestBody FlightDTO flightDTO);
 }

@@ -14,13 +14,13 @@ public class StaffController {
     @Autowired
     private AdminInterface adminInterface;
 
-    @PostMapping("/addFlight")
+    @PostMapping("addFlight")
     ResponseEntity<String> addFlight(@RequestBody FlightDTO flightDTO) {
         return adminInterface.addFlight(flightDTO);
     }
 
-    @PostMapping("/updateFlight/{flight}")
-    ResponseEntity<String> updateFlight(@RequestBody FlightDTO flightDTO, @PathVariable Long flight) {
-        return adminInterface.updateFlight(flightDTO, flight);
+    @PostMapping("/updateFlight")
+    ResponseEntity<String> updateFlight(@RequestBody FlightDTO flightDTO) {
+        return adminInterface.updateFlight(flightDTO);
     }
 }
