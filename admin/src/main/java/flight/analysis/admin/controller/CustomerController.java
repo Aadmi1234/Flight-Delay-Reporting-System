@@ -1,6 +1,7 @@
 package flight.analysis.admin.controller;
 
 import flight.analysis.admin.dto.BookFlightDTO;
+import flight.analysis.admin.dto.CustomerDTO;
 import flight.analysis.admin.dto.DelayDataDTO;
 import flight.analysis.admin.model.Customer;
 import flight.analysis.admin.service.CustomerService;
@@ -18,7 +19,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("register")
-    ResponseEntity<String> registerCustomer(@RequestBody Customer customer) {
+    ResponseEntity<String> registerCustomer(@RequestBody CustomerDTO customer) {
         return customerService.registerCustomer(customer);
     }
 
@@ -28,12 +29,12 @@ public class CustomerController {
     }
 
     @GetMapping("getFlights")
-    List<DelayDataDTO> getFlights(@RequestBody Customer customer) {
+    List<DelayDataDTO> getFlights(@RequestBody CustomerDTO customer) {
         return customerService.getFlights(customer);
     }
 
     @GetMapping("getFlight/{flight}")
-    Optional<DelayDataDTO> getFlight(@RequestBody Customer customer, @PathVariable("flight") Long flight) {
+    Optional<DelayDataDTO> getFlight(@RequestBody CustomerDTO customer, @PathVariable("flight") Long flight) {
         DelayDataDTO delay = customerService.getFlight(customer, flight);
         return Optional.ofNullable(delay);
     }

@@ -1,6 +1,7 @@
 package flight.analysis.admin.service;
 
 import flight.analysis.admin.dto.BookFlightDTO;
+import flight.analysis.admin.dto.CustomerDTO;
 import flight.analysis.admin.dto.DelayDataDTO;
 import flight.analysis.admin.model.Bookings;
 import flight.analysis.admin.model.Customer;
@@ -27,20 +28,19 @@ public class CustomerService {
     @Autowired
     private FlightRepo flightRepo;
 
-    public ResponseEntity<String> registerCustomer(Customer customer) {
-        Optional<Customer> temp = customerRepo.findById(customer.getId());
-        if (temp.isEmpty()) {
-            customerRepo.save(customer);
-            return new ResponseEntity<>("Customer added.", HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Customer already present.", HttpStatus.CONFLICT);
+    public ResponseEntity<String> registerCustomer(CustomerDTO customer) {
+        Customer customer1 = new Customer();
+        customer1.setName(customer.getName());
+        customer1.setMobileNo(customer.getMobileNo());
+        customerRepo.save(customer1);
+        return new ResponseEntity<>("Customer added.", HttpStatus.OK);
     }
 
     public ResponseEntity<String> bookFlight(BookFlightDTO bookFlightDTO) {
         Optional<Flight> flight = flightRepo.findById(bookFlightDTO.getFlight());
         if (!flight.isEmpty()) {
             Bookings booking = new Bookings();
-            booking.setCustomerId(bookFlightDTO.getCustomer().getId());
+            booking.setMobileNo(bookFlightDTO.getCustomer().getMobileNo());
             booking.setFlight(flight.get().getNumber());
             bookingsRepo.save(booking);
             return new ResponseEntity<>("Flight booked.", HttpStatus.OK);
@@ -48,17 +48,17 @@ public class CustomerService {
         return new ResponseEntity<>("Flight not found.", HttpStatus.NOT_FOUND);
     }
 
-    public List<DelayDataDTO> getFlights(Customer customer) {
-        Long customerId = customer.getId();
-        List<Bookings> bookings = bookingsRepo.findByCustomer(customerId);
+    public List<DelayDataDTO> getFlights(CustomerDTO customer) {
+        String mobileNo = customer.getMobileNo();
+        List<Bookings> bookings = bookingsRepo.findByMobileNo(mobileNo);
         List<DelayDataDTO> delays = new ArrayList<>();
         if (!bookings.isEmpty()) delays = getDelays(bookings);
         return delays;
     }
 
-    public DelayDataDTO getFlight(Customer customer, Long flight) {
-        Long customerId = customer.getId();
-        Optional<Bookings> booking = bookingsRepo.findFirstByCustomerAndFlight(customerId, flight);
+    public DelayDataDTO getFlight(CustomerDTO customer, Long flight) {
+        String mobileNo = customer.getMobileNo();
+        Optional<Bookings> booking = bookingsRepo.findOneByMobileNoAndFlight(mobileNo, flight);
         if (!booking.isEmpty()) return getDelays(Collections.singletonList(booking.get())).getFirst();
         return null;
     }

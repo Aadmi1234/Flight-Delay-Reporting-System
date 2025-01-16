@@ -1,5 +1,6 @@
 package flight.analysis.admin.controller;
 
+import flight.analysis.admin.dto.FlightDTO;
 import flight.analysis.admin.model.Flight;
 import flight.analysis.admin.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,12 @@ public class StaffController {
     private StaffService staffService;
 
     @PostMapping("addFlight")
-    ResponseEntity<String> addFlight(@RequestBody Flight flight) {
+    ResponseEntity<String> addFlight(@RequestBody FlightDTO flight) {
         return staffService.addFlight(flight);
     }
 
     @PostMapping("updateFlight/{flight}")
-    ResponseEntity<String> updateFlight(@RequestBody Flight flight, @PathVariable Long flightId) {
+    ResponseEntity<String> updateFlight(@RequestBody FlightDTO flight, @PathVariable Long flightId) {
         return staffService.updateFlight(flight, flightId);
     }
 }

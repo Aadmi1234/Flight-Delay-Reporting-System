@@ -10,6 +10,6 @@ public class Bookings {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long bookingId;
-    Long customerId;
+    String mobileNo;
     Long flight;
 }

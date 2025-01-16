@@ -1,4 +1,4 @@
-package flight.analysis.customer.dto;
+package flight.analysis.admin.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BookFlightDTO {
-    CustomerDTO customer;
-    Long flight;
+public class FlightDTO {
+    Long number;
+    String source;
+    String destination;
+    Long tof;
+    Long delay;
 }
