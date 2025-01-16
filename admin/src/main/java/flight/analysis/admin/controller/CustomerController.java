@@ -28,12 +28,12 @@ public class CustomerController {
         return customerService.bookFlight(bookFlightDTO);
     }
 
-    @GetMapping("getFlights")
+    @PostMapping("getFlights")
     List<DelayDataDTO> getFlights(@RequestBody CustomerDTO customer) {
         return customerService.getFlights(customer);
     }
 
-    @GetMapping("getFlight/{flight}")
+    @PostMapping("getFlight/{flight}")
     Optional<DelayDataDTO> getFlight(@RequestBody CustomerDTO customer, @PathVariable("flight") Long flight) {
         DelayDataDTO delay = customerService.getFlight(customer, flight);
         return Optional.ofNullable(delay);

@@ -26,12 +26,12 @@ public class CustomerController {
         return adminInterface.bookFlight(bookFlightDTO);
     }
 
-    @GetMapping("/getFlights")
+    @PostMapping("/getFlights")
     List<DelayDataDTO> getFlights(@RequestBody CustomerDTO customer) {
         return adminInterface.getFlights(customer);
     }
 
-    @GetMapping("/getFlight/{flight}")
+    @PostMapping("/getFlight/{flight}")
     Optional<DelayDataDTO> getFlight(@RequestBody CustomerDTO customer, @PathVariable("flight") Long flight) {
         return adminInterface.getFlight(customer, flight);
     }

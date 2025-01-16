@@ -21,9 +21,9 @@ public interface AdminInterface {
     @PostMapping("customer/bookFlight")
     ResponseEntity<String> bookFlight(@RequestBody BookFlightDTO bookFlightDTO);
 
-    @GetMapping("customer/getFlights")
+    @PostMapping("customer/getFlights")
     List<DelayDataDTO> getFlights(@RequestBody CustomerDTO customer);
 
-    @GetMapping("customer/getFlight/{flight}")
+    @PostMapping("customer/getFlight/{flight}")
     Optional<DelayDataDTO> getFlight(@RequestBody CustomerDTO customer, @PathVariable("flight") Long flight);
 }

@@ -69,7 +69,9 @@ public class CustomerService {
         List<DelayDataDTO> delays = new ArrayList<>();
         for (Bookings booking : bookings) {
             Flight flight = flightRepo.findById(booking.getFlight()).get();
-            DelayDataDTO temp = new DelayDataDTO(flight.getNumber(), flight.getDelay());
+            DelayDataDTO temp = new DelayDataDTO();
+            temp.setDelay(flight.getDelay());
+            temp.setFlight(flight.getNumber());
             delays.add(temp);
         }
         return delays;
